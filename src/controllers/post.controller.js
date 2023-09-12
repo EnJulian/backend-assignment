@@ -39,7 +39,7 @@ const updatePost = async (req, res, next) => {
   try {
     const postId = req.params.id; // Extract the postId from the request parameters
     const updatedPostData = req.body; // Extract the updated post data from the request body
-    const result = await PostService.updatePost(postId, updatedPostData);
+    const result = await PostService.updatePostById(postId, updatedPostData);
 
     if (result.code === 404) {
       return res.status(404).json(result);
@@ -51,11 +51,26 @@ const updatePost = async (req, res, next) => {
   }
 }
 
+const deletePost = async (req, res, next) => {
+  try {
+    const postId = req.params.id; // Extract the postId from the request parameters
+    const result = await PostService.deletePostById(postId);
+
+    if (result.code === 404) {
+      return res.status(404).json(result);
+    }
+
+    return res.status(result.code).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createPost,
   fetchAllPosts,
   fetchSinglePost,
-  updatePost
+  updatePost,
+  deletePost
 };
-
 

@@ -1,6 +1,4 @@
-/**
- * Add new post
- */
+
 const addPost = `
     INSERT INTO posts(
         title,
@@ -29,10 +27,18 @@ const updatePost = `
     RETURNING id, title, author, user_id, published_at, updated_at
 `
 
+
+const deletePost = `
+    DELETE FROM posts
+    WHERE id=$1
+    RETURNING id, title, author, user_id, published_at, created_at
+`;
+
 module.exports = {
-    addPost: addPost,
+    addPost,
     getPostByTitle,
-    getAllPosts: getAllPosts,
-    getSinglePost: getSinglePost,
-    updatePost: updatePost,
-}
+    getAllPosts,
+    getSinglePost,
+    updatePost,
+    deletePost
+};

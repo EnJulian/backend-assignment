@@ -1,6 +1,4 @@
-/**
- * Add New User
- */
+
 const addUser = `
   INSERT INTO users(
     firstname,
@@ -10,7 +8,7 @@ const addUser = `
     password,
     role
   )
-  VALUES ($1,$2,$3,$4) RETURNING id, firstname, lastname, username, email, role, created_at
+  VALUES ($1,$2,$3,$4,$5,$6) RETURNING id, firstname, lastname, username, email, password, role, created_at
 `;
 
 const findUserByEmail = `

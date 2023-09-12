@@ -24,7 +24,7 @@ const createUser = async (body) => {
     // Encrypt password
     const saltRounds = 12;
     const hash = bcrypt.hashSync(password, saltRounds);
-    const response = await runQuery(addUser, [ firstname, lastname,username, email, hash, "user"])
+    const response = await runQuery(addUser, [ firstname, lastname, username, email, hash, "user"])
 
     return {
         code: 201,
@@ -39,14 +39,7 @@ const loginUser = async (body) => {
 
     // Check if that user exists inside the db
     const user = await runQuery(findUserByUsername, [username]);
-    /*
-    user = {
-        password,
-        role,
-        name,
-        id
-    }
-    */
+  
     if (user.length === 0) {
         throw {
             code: 404,

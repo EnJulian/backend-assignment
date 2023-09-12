@@ -1,7 +1,7 @@
 const {
   addPost,
   getAllPosts,
-  getSinglePost, updatePost,
+  getSinglePost, updatePost, deletePost,
 } = require('../queries/posts');
 const { runQuery } = require('../config/database.config');
 
@@ -66,9 +66,28 @@ const updatePostById = async (id, body) => {
   }
 };
 
+
+const deletePostById = async (id) => {
+  const result = await runQuery(deletePost, [id]);
+  if (result.rowCount === 1) {
+    return {
+      code: 200,
+      status: 'success',
+      message: 'Post deleted successfully',
+    };
+  } else {
+    return {
+      code: 404,
+      status: 'error',
+      message: 'Post not found',
+    };
+  }
+};
+
 module.exports = {
   addNewPost,
   retrieveAllPosts,
   retrieveSinglePost,
   updatePostById,
+  deletePostById
 };
