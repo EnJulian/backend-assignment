@@ -1,9 +1,9 @@
-const express = require('express');
+const Express = require('express');
 const PostController = require('../controllers/post.controller');
 const { verifyToken } = require('../middlewares/auth.middleware');
 const { checkIfPostExists } = require('../middlewares/post.middleware');
 
-const router = express.Router();
+const router = Express.Router();
 
 router.post('/', verifyToken, checkIfPostExists, PostController.createPost);
 router.get('/', PostController.fetchAllPosts);
